@@ -4,7 +4,7 @@
   "description": "Node, Express, and MongoDB base project for faster api creation ",
   "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./src/server.js",
     "watch": "nodemon ./src/server.js",
     "postversion": "git push && git push --tags && rm -rf build/temp"
   },
@@ -34,7 +34,9 @@
     "mongoose-bcrypt": "^1.6.0",
     "mongoose-beautiful-unique-validation": "^7.1.1",
     "mongoose-timestamp": "^0.6.0",
-    "node-cache": "^5.1.0"
+    "node-cache": "^5.1.0",
+    "winston": "^3.2.1",
+    "winston-papertrail": "^1.0.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
