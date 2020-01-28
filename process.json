@@ -1,0 +1,13 @@
+{
+    "apps": [
+        {
+            "name": "node-mongo-api",
+            "script": "src/server.js",
+            "log_date_format": "DD/MM/YYYY HH:mm:ss Z",
+            "autorestart": true,
+            "env": {
+                "TZ": "America/Sao_Paulo"
+            }
+        }
+    ]
+}
