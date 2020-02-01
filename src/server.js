@@ -16,9 +16,11 @@ const config = require('./config');
 //Application custom logger module
 const logger = require('./utils/logger');
 
-//Context path for the API
-const BASE_PATH = "/api";
+//Importe express middleware
 const api = express();
+
+//Importing routes file
+const routes = require('./routes');
 
 //Accepting CORS
 api.use(cors());
@@ -53,18 +55,21 @@ api.use(
     })
 );
 
-//When the token is invalid, throw a 401 HTTP error code
+//Throw a 401 HTTP error code when token is invalid
 api.use((err, req, res, next) => {
 	if (err.name === 'UnauthorizedError') {
 		res.status(401).json({
             message: systemMessages.HttpErrors[401]
         });
-	}
+    }
 });
+
+//Setting the application routes
+api.use(routes);
 
 api.listen(config.server.port, err => {
 	if (err) {
-		logger.error(err);
+        logger.error(err);
 		process.exit(1);
 	}
 	//require('./utils/db');
