@@ -19,6 +19,8 @@ const logger = require('./utils/logger');
 //Importe express middleware
 const api = express();
 
+//Context path for the API
+const BASE_PATH = "/api";
 //Importing routes file
 const routes = require('./routes');
 
@@ -65,7 +67,7 @@ api.use((err, req, res, next) => {
 });
 
 //Setting the application routes
-api.use(routes);
+api.use(BASE_PATH, routes);
 
 api.listen(config.server.port, err => {
 	if (err) {

@@ -5,11 +5,10 @@ const router = express.Router();
 const authRouter = require('./auth');
 const systemMessages = require('../utils/messages');
 
-//Context path for the API
-const BASE_PATH = "/api";
+
 
 //Auth router
-router.use(`${BASE_PATH}/auth`, authRouter);
+router.use("/auth", authRouter);
 
 //Default error handling when route is not found
 router.use((req, res, next) => {
