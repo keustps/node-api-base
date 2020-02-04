@@ -13,13 +13,13 @@ const middleware = jwt({
         return null;
     }
 })
-.unless({
-    path: [
-        '/',
-        /\/auth\/?/,
-        //For create new users
-        { url: /\/user\/?/, methods: ['POST'] }
-    ]
-})
+    .unless({
+        path: [
+            '/',
+            /\/auth\/?/,
+            //For create new users
+            { url: /\/user\/?/, methods: ['POST'] }
+        ]
+    });
 
 module.exports = middleware;

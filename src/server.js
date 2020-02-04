@@ -19,7 +19,7 @@ const jwt = require('./utils/jwt');
 const api = express();
 
 //Context path for the API
-const BASE_PATH = "/api";
+const BASE_PATH = '/api';
 //Importing routes file
 const routes = require('./routes');
 
@@ -38,7 +38,7 @@ api.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 //Throw a 401 HTTP error code when token is invalid
 api.use((err, req, res, next) => {
-	if (err.name === 'UnauthorizedError') {
+    if (err.name === 'UnauthorizedError') {
         res.status(401).json({
             message: systemMessages.HttpErrors[401]
         });
@@ -49,14 +49,14 @@ api.use((err, req, res, next) => {
 api.use(BASE_PATH, routes);
 
 api.listen(config.server.port, err => {
-	if (err) {
+    if (err) {
         logger.error(err);
-		process.exit(1);
-	}
-	//require('./utils/db');
-	logger.info(
-		`API is now running on port ${config.server.port} in ${config.env} mode`
-	);
+        process.exit(1);
+    }
+    //require('./utils/db');
+    logger.info(
+        `API is now running on port ${config.server.port} in ${config.env} mode`
+    );
 });
 
 module.exports = api;

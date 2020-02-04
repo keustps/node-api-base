@@ -8,7 +8,7 @@ const systemMessages = require('../utils/messages');
 
 
 //Auth router
-router.use("/auth", authRouter);
+router.use('/auth', authRouter);
 
 //Default error handling when route is not found
 router.use((req, res, next) => {

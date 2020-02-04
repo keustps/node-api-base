@@ -15,10 +15,10 @@ const config = {
         uri: process.env.MONGO_URI
     },
     logger: {
-		host: process.env.LOGGER_HOST,
-		port: process.env.LOGGER_PORT,
-	},
+        host: process.env.LOGGER_HOST,
+        port: process.env.LOGGER_PORT,
+    },
 
 };
 
-module.exports = config
+module.exports = config;
