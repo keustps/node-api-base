@@ -1,5 +1,5 @@
 const jwt = require('express-jwt');
-const config = require('../../config');
+const config = require('../config');
 
 //Validating the JWT Token using the configured secret
 const middleware = jwt({

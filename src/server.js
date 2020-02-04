@@ -13,7 +13,7 @@ const config = require('./config');
 //Application custom logger module
 const logger = require('./utils/logger');
 //Application JWT middleware
-const jwt = require('./utils/jwt');
+const jwt = require('./middlewares/jwt');
 
 //Importe express middleware
 const api = express();
