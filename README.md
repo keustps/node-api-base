@@ -4,7 +4,7 @@
 * Configuration module with [dotenv](https://github.com/motdotla/dotenv) package.
 * Route module for centralization of all application routes.
 * Logger module inclunding support for external log server.  
-(For example purposes, this project use [Papertrail](https://www.papertrail.com/) ).
+(In order to exemplify this project use [Papertrail](https://www.papertrail.com/) ).
 * Messages module for message strings centralization
 * Configuration to running in **production** using [PM2](https://pm2.keymetrics.io/).
 * Authentication support using JWT.
