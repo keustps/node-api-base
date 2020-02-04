@@ -14,6 +14,7 @@
 * Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org/).
 * Testing with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
 * Lint using [Eslint](https://eslint.org/)
+* Configuration for consistent coding styles across various editors and IDEs using [EditorConfig](https://editorconfig.org/)
 
 ## Author
 Keust Pablo Silvano <keustps@gmail.com>
