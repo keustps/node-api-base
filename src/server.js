@@ -36,11 +36,14 @@ api.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 //Validating the JWT Token using the configured secret
 api.use(jwt);
 //Throw a 401 HTTP error code when token is invalid
-api.use((err, req, res) => {
+api.use((err, req, res, next) => {
     if (err.name === 'UnauthorizedError') {
         return res.status(401).json({
             message: systemMessages.HttpErrors[401]
         });
+    }else {
+        logger.error('Api error', err);
+        next(err);
     }
 });
 

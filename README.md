@@ -9,7 +9,7 @@
 * Configuration to running in **production** using [PM2](https://pm2.keymetrics.io/).
 * Authentication support using JWT.
 * Base controller with CRUD operations to extends resource controller.
-* Database integration and ORM using Mongoose.
+* Database integration and Object Modeling Tool using [mongoose](https://mongoosejs.com/).
 * CORS enabled.
 * Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org/).
 * Testing with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
