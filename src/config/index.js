@@ -5,12 +5,20 @@ const config = {
     const: {
         MAXIMO_MINS_ATIVO: 40
     },
+    jwt: {
+        secret: process.env.SECRET,
+    },
     server: {
         port: process.env.PORT
     },
     database: {
         uri: process.env.MONGO_URI
     },
+    logger: {
+		host: process.env.LOGGER_HOST,
+		port: process.env.LOGGER_PORT,
+	},
+
 };
 
 module.exports = config

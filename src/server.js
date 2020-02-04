@@ -1,13 +1,10 @@
 'use strict';
 
-require('dotenv').config();
-
 //Imports
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const compression = require('compression');
-const jwt = require('express-jwt');
 
 //Reading system messages from a central message module
 const systemMessages = require('./utils/messages');
@@ -15,6 +12,8 @@ const systemMessages = require('./utils/messages');
 const config = require('./config');
 //Application custom logger module
 const logger = require('./utils/logger');
+//Application JWT middleware
+const jwt = require('./utils/jwt');
 
 //Importe express middleware
 const api = express();
@@ -35,32 +34,12 @@ api.use(bodyParser.json({ limit: '50mb' }));
 api.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 //Validating the JWT Token using the configured secret
-api.use(
-    jwt({
-        secret: process.env.SECRET,
-        getToken: function fromHeaderOrQuerystring(req) {
-            if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-                return req.headers.authorization.split(' ')[1];
-            } else if (req.query && req.query.token) {
-                return req.query.token;
-            }
-            return null;
-        }
-    })
-    .unless({
-        path: [
-            '/',
-            /\/auth\/?/,
-            //For create new users
-            { url: /\/user\/?/, methods: ['POST'] }
-        ]
-    })
-);
+//api.use(jwt);
 
 //Throw a 401 HTTP error code when token is invalid
 api.use((err, req, res, next) => {
 	if (err.name === 'UnauthorizedError') {
-		res.status(401).json({
+        res.status(401).json({
             message: systemMessages.HttpErrors[401]
         });
     }

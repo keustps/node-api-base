@@ -1,5 +1,9 @@
 const winston = require('winston');
-const winstonPapertrail = require('winston-papertrail');
+//
+// Requiring `winston-papertrail` will expose
+// `winston.transports.Papertrail`
+//
+require('winston-papertrail').Papertrail;
 
 const config = require('../../config');
 
@@ -13,7 +17,7 @@ if (config.env == 'test' || config.env == 'local' || config.env == 'development'
         port: config.logger.port,
     });
 
-    logger = new winston.Logger({
+    logger = new winston.createLogger({
         transports: [papertrailTransport],
     });
 }
