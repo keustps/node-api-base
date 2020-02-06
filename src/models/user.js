@@ -22,6 +22,6 @@ const userSchema = new AppBaseSchema({
 
 
 userSchema.plugin(bcrypt);
-userSchema.index({ login: 1 }, { unique: true, dropDups: true });
+userSchema.index({ username: 1 }, { unique: true, dropDups: true });
 
 module.exports = mongoose.model('User', userSchema);
