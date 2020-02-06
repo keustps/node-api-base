@@ -11,10 +11,12 @@
 * Base controller with CRUD operations to extends resource controller.
 * Database integration and Object Modeling Tool using [mongoose](https://mongoosejs.com/).
 * CORS enabled.
+* Better messages for mongoose unique and required validations.
+* Migrations and seeders for easy database changes tracking and syncing across all develop team.
 * Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org/).
 * Testing with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
-* Lint using [Eslint](https://eslint.org/)
-* Configuration for consistent coding styles across various editors and IDEs using [EditorConfig](https://editorconfig.org/)
+* Lint using [Eslint](https://eslint.org/).
+* Configuration for consistent coding styles across various editors and IDEs using [EditorConfig](https://editorconfig.org/).
 
 ## Author
 Keust Pablo Silvano <keustps@gmail.com>
