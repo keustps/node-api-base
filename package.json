@@ -8,6 +8,7 @@
     "watch": "nodemon ./src/server.js",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
+    "migrate": "./node_modules/.bin/migrate",
     "postversion": "git push && git push --tags && rm -rf build/temp"
   },
   "repository": {
@@ -42,6 +43,7 @@
     "winston-papertrail": "^1.0.5"
   },
   "devDependencies": {
+    "migrate-mongoose": "^4.0.0",
     "nodemon": "^2.0.2"
   }
 }
