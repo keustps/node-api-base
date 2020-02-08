@@ -11,6 +11,7 @@
 * Base controller with CRUD operations to extends resource controller.
 * Database integration and Object Modeling Tool using [mongoose](https://mongoosejs.com/).
 * CORS enabled.
+* Request validation using [express-validator](https://express-validator.github.io/docs/) 
 * Better messages for mongoose unique and required validations.
 * Migrations and seeders for easy database changes tracking and syncing across all develop team.
 * Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org/).

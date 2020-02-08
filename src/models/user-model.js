@@ -16,7 +16,12 @@ const userSchema = new AppBaseSchema({
         type: String,
         required: true,
         bcrypt: true
-    }
+    },
+    master: {
+        type: Boolean,
+        default: false
+    },
+
 
 }, { collection: 'users' });
 

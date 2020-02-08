@@ -8,7 +8,13 @@ const routerErrors = {
     NOT_FOUND : (path, method) => {return `Cannot ${method} ${path} on server`;}
 };
 
+const authErrors = {
+    INVALID_TOKEN : 'Invalid Token',
+    ONLY_ADMIN : 'This functionality is restricted to administrators'
+};
+
 module.exports = {
     HttpErrors : httpErrors,
-    RouterErrors : routerErrors
+    RouterErrors : routerErrors,
+    AuthErrors : authErrors
 };
