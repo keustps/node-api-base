@@ -13,7 +13,7 @@
 * CORS enabled.
 * Request validation using [express-validator](https://express-validator.github.io/docs/) 
 * Better messages for mongoose unique and required validations.
-* Migrations and seeders for easy database changes tracking and syncing across all develop team.
+* Migrations for easy database changes tracking and syncing across all develop team.
 * Included CI (Continuous Integration) with [Travis CI](https://travis-ci.org/).
 * Testing with [Mocha](https://mochajs.org/) and [Chai](https://www.chaijs.com/).
 * Lint using [Eslint](https://eslint.org/).
