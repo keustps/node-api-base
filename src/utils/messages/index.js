@@ -13,8 +13,13 @@ const authErrors = {
     ONLY_ADMIN : 'This functionality is restricted to administrators'
 };
 
+const requestValidationErrors = {
+    CANT_BE_EMPTY : (field) => {return `${field} cant be empty`}
+};
+
 module.exports = {
     HttpErrors : httpErrors,
     RouterErrors : routerErrors,
-    AuthErrors : authErrors
+    AuthErrors : authErrors,
+    RequestValidationErrors : requestValidationErrors
 };

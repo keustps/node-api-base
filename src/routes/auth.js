@@ -3,11 +3,12 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const systemMessages = require('../utils/messages');
 //const controller = require('../controllers/auth-controller');
 
 router.post('/', [
-    check('username').notEmpty().withMessage('Username cant be empty'),
-    check('password').notEmpty().withMessage('Password cant be empty')
+    check('username').notEmpty().withMessage(systemMessages.RequestValidationErrors.CANT_BE_EMPTY('Username')),
+    check('password').notEmpty().withMessage(systemMessages.RequestValidationErrors.CANT_BE_EMPTY('Password'))
 ], (req, res) => {
 
     // Finds the validation errors in this request and wraps them in an object with handy functions
