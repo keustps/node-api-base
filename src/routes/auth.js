@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const systemMessages = require('../utils/messages');
-//const controller = require('../controllers/auth-controller');
+const controller = require('../controllers/auth-controller');
 
 router.post('/', [
     check('username').notEmpty().withMessage(systemMessages.RequestValidationErrors.CANT_BE_EMPTY('Username')),
@@ -17,9 +17,7 @@ router.post('/', [
         return res.status(422).json({ errors: errors.array() });
     }
 
-    return res.status(200).json({
-        message: 'auth'
-    });
+    return controller.Authenticate(req, res);
 });
 
 module.exports = router;

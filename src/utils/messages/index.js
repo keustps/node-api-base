@@ -10,11 +10,12 @@ const routerErrors = {
 
 const authErrors = {
     INVALID_TOKEN : 'Invalid Token',
-    ONLY_ADMIN : 'This functionality is restricted to administrators'
+    ONLY_ADMIN : 'This functionality is restricted to administrators',
+    WRONG_USER_OR_PASS : 'Invalid user or password'
 };
 
 const requestValidationErrors = {
-    CANT_BE_EMPTY : (field) => {return `${field} cant be empty`}
+    CANT_BE_EMPTY : (field) => {return `${field} cant be empty`;}
 };
 
 module.exports = {
