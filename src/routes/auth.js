@@ -1,5 +1,6 @@
 'use strict';
 
+const AppError = require('../utils/error');
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
@@ -14,7 +15,7 @@ router.post('/', [
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+        return res.status(422).json(new AppError(422, systemMessages.HttpErrors[422], errors.array()));
     }
 
     return controller.Authenticate(req, res);

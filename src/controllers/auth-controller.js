@@ -8,7 +8,6 @@ const authenticate = (req, res) => {
     User.findOne({
         username: req.body.username
     }).lean().exec().then( user => {
-        logger.log('user: ', user);
         //Is there an user with this username in the database?
         if(!user){
             return res.status(401).send({ message: systemMessage.AuthErrors.WRONG_USER_OR_PASS });

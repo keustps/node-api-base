@@ -3,18 +3,19 @@
 const mongoose = require('mongoose');
 const bcrypt = require('mongoose-bcrypt');
 const AppBaseSchema = require('./app-base-schema');
+const systemMessages = require('../utils/messages');
 
 const userSchema = new AppBaseSchema({
     username: {
         type: String,
         lowercase: true,
         trim: true,
-        unique: 'There is another user with this login ({VALUE})',
-        required: [true, 'Username is required']
+        unique: systemMessages.ModelValidation.LOGIN_NOT_UNIQUE,
+        required: [true, systemMessages.ModelValidation.IS_REQUIRED('Username') ]
     },
     password: {
         type: String,
-        required: true,
+        required: [true, systemMessages.ModelValidation.IS_REQUIRED('Password')],
         bcrypt: true
     },
     master: {
