@@ -12,7 +12,7 @@ class AppError {
             this.detail = detail;
 
             //Handling model validation errors
-            if(detail.errors){
+            if(detail && detail.errors){
                 let errors = [];
                 for (let field in detail.errors) {
                     errors.push(detail.errors[field].message);
