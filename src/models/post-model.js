@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const AppBaseSchema = require('./app-base-schema');
+const systemMessages = require('../utils/messages');
 
 const postSchema = new AppBaseSchema({
     author:  {
@@ -10,7 +11,11 @@ const postSchema = new AppBaseSchema({
     },
     title: {
         type: String,
-        required: [true, 'O campo modelo é obrigatório.']
+        required: [true, systemMessages.ModelValidation.IS_REQUIRED('Title')]
+    },
+    text: {
+        type: String,
+        required: [true, systemMessages.ModelValidation.IS_REQUIRED('Text')]
     },
 
 

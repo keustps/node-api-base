@@ -5,10 +5,12 @@ const router = express.Router();
 const systemMessages = require('../utils/messages');
 const authRouter = require('./auth');
 const userRouter = require('./user');
+const postRouter = require('./post');
 
 //Importing all application routers
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
+router.use('/post', postRouter);
 
 //Default error handling when route is not found
 router.use((req, res, next) => {
