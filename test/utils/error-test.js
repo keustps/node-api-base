@@ -2,8 +2,8 @@ const chai = require('chai');
 const AppError = require('../../src/utils/error');
 const assert = chai.assert;
 
-//Constants for use on tests
-const [errorCode, errorMessage, errorDetail] = [401, "Generic Error", { code : 500, errors : [ {message : "Some error #1", message : "Some error #2"}] }]
+//Constants for use in test cases
+const [errorCode, errorMessage, errorDetail] = [401, 'Generic Error', { code : 500, errors : [ {message : 'Some error #1'}, {message : 'Some error #2'} ] }];
 
 describe('Testing Generic AppError class...', () =>{
     it('Error without description and detail', ()=>{
@@ -21,7 +21,7 @@ describe('Testing Generic AppError class...', () =>{
         let error = new AppError(errorCode, errorMessage, errorDetail);
         assert.equal(error.code, errorCode);
         assert.equal(error.message, errorMessage);
-        assert.equal(error.detail.errors[1], errorDetail.errors[1]);
-        assert.equal(error.detail.errors[2], errorDetail.errors[2]);
+        assert.equal(error.detail.errors[0], errorDetail.errors[0].message);
+        assert.equal(error.detail.errors[1], errorDetail.errors[1].message);
     });
-})
+});

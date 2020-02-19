@@ -56,7 +56,7 @@ api.listen(config.server.port, err => {
         process.exit(1);
     }
     //Connecting to database
-    let connection  = require('./utils/db');
+    require('./utils/db');
     logger.info(
         `API is now running on port ${config.server.port} in ${config.env} mode`
     );

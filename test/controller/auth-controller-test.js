@@ -1,7 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const request = chai.request;
-const config = require('../../src/config');
 const app = require('../../src/server');
 
 // Configure chai
@@ -10,7 +8,7 @@ chai.should();
 
 describe('Testing Authentication...', () =>{
     describe('POST /auth', ()=>{
-        it("Should return 401 if credential is not valid", (done) =>{
+        it('Should return 401 if credential is not valid', (done) =>{
             chai.request(app)
             .post('/api/auth')
             .set('Accept', 'application/json')
@@ -21,7 +19,7 @@ describe('Testing Authentication...', () =>{
                 done();
             });
         });
-        it("Should return 201 if credential is valid", (done) =>{
+        it('Should return 201 if credential is valid', (done) =>{
             chai.request(app)
             .post('/api/auth')
             .set('Accept', 'application/json')
@@ -32,5 +30,5 @@ describe('Testing Authentication...', () =>{
                 done();
             });
         });
-    })
+    });
 });

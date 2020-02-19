@@ -22,14 +22,14 @@ const requestValidationErrors = {
 const modelValidation = {
     LOGIN_NOT_UNIQUE : 'There is another user with this login ({VALUE})',
     IS_REQUIRED : (field) =>{ return `${field} is required`;}
-}
+};
 
 const crudErros = {
     WHEN_CREATE : (entity) =>{ return `Error when inserting ${entity}`;},
     WHEN_READ : (entity) =>{ return `Error when reading ${entity}`;},
     WHEN_UPDATE : (entity) =>{ return `Error when updating ${entity}`;},
     WHEN_DELETE : (entity) =>{ return `Error when deleting ${entity}`;},
-}
+};
 
 module.exports = {
     HttpErrors : httpErrors,

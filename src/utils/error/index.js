@@ -2,7 +2,7 @@ const systemMessages = require('../messages');
 
 class AppError {
     constructor(code, message, detail) {
-        if (typeof code === "object") {
+        if (typeof code === 'object') {
             this.code = code.code;
             this.message = code.messagse;
             this.detail = code.detail;

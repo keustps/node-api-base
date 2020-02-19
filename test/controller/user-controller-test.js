@@ -1,7 +1,5 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const request = chai.request;
-const config = require('../../src/config');
 const app = require('../../src/server');
 
 // Configure chai
@@ -10,13 +8,13 @@ chai.should();
 
 describe('Testing User CRUD operations...', () =>{
     describe('GET /user', ()=>{
-        it("Should need authorization", (done) =>{
+        it('Should need authorization', (done) =>{
             chai.request(app)
             .get('/user')
             .end( (err, res) =>{
                 res.should.have.status(401);
                 done();
             });
-        })
-    })
-})
+        });
+    });
+});

@@ -11,4 +11,4 @@ module.exports = {
     post: controller.post.bind(controller),
     put: controller.put.bind(controller),
     delete: controller.delete.bind(controller)
-}
+};
