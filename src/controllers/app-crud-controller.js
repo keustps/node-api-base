@@ -12,71 +12,72 @@ class AppCrudController {
         this.entityName = entityName;
     }
 
-    list(req, res, next) {
+    list(req, res) {
 
-        let filtros = {};
+        let filters = {};
 
-        //Caso receba um objeto do tipo filtro
-        if (!!req.query.filtro) {
-            filtros = JSON.parse(req.query.filtro);
-        } else if (!!req.query && !!req.query.ativo) {
-            //Caso receba um query param ?ativo=true, filtra apenas os ativos
-            filtros = {
-                ativo: req.query.ativo,
-                dtDesativacao: {$exists: false}
+        //Supporting filter query
+        if (req.query.filter) {
+            filters = JSON.parse(req.query.filter);
+        } else if (req.query && req.query.active) {
+            //If there is a query param "?active=true", search only the active ones
+            filters = {
+                active: req.query.active,
+                deletedAt: {$exists: false}
             };
         }else {
-            //Por padrão não exibe os registros com data de desativação
-            filtros = {
-                dtDesativacao: {$exists: false}
+            //Search only the active ones by default
+            filters = {
+                deletedAt: {$exists: false}
             };
         }
 
-        var consulta = this.model.find(filtros);
+        var searchQuery = this.model.find(filters);
 
-        //Caso receba os parâmetros de paginação
-        if(!!req.query.skip && !!req.query.limit){
-            var consulta = consulta.skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit));
+        //Pagination support
+        if(req.query.skip && req.query.limit){
+            searchQuery = searchQuery.skip(parseInt(req.query.skip)).limit(parseInt(req.query.limit));
         }
 
-        consulta.lean().exec()
+        searchQuery.lean().exec()
         .then((data) => {
             res.status(200).send(data);
-        }).catch((e) => {
-            logger.error(e);
+        }).catch((err) => {
+            logger.error(err);
             res.status(500).send(new AppError(500, systemMessages.CrudErrors.WHEN_READ(this.entityName), err));
         });
     }
 
-    delete(req, res, next) {
-        this.model.findByIdAndUpdate({ _id: req.params.id }, { dtDesativacao: new Date() }, { new: true})
+    delete(req, res) {
+        //Not a physical delete, but a soft delete
+        this.model.findByIdAndUpdate({ _id: req.params.id }, { deletedAt: new Date() }, { new: true})
             .exec()
             .then((data) => {
                 res.status(200).send(data);
-            }).catch((e) => {
-                logger.error(e);
+            }).catch((err) => {
+                logger.error(err);
                 res.status(500).send(new AppError(500, systemMessages.CrudErrors.WHEN_DELETE(this.entityName), err));
             });
     }
 
     get(req, res) {
-        var consulta = this.model.findById(req.params.id);
-        consulta.lean().exec()
+        var searchQuery = this.model.findById(req.params.id);
+        searchQuery.lean().exec()
             .then((data) => {
                 res.status(200).send(data);
-            }).catch((e) => {
-                logger.error(e);
+            }).catch((err) => {
+                logger.error(err);
                 res.status(500).send(new AppError(500, systemMessages.CrudErrors.WHEN_READ(this.entityName), err));
             });
-    };
+    }
 
     post(req, res) {
         const data = Object.assign({}, req.body) || {};
-        //Caso possua o cabeçalho de autenticação adiciona a informação do usuário que está criando o resgitro.
-        if(!!req.headers.authorization){
+        //Get the logged user information to inject updatedBy information
+        if(req.headers.authorization){
             try {
                 let obj = authService.DecodeToken(req.headers.authorization);
-                if(!!obj.id){
+                if(obj.id){
                     data.updatedBy = obj.id;
                 }
             }catch(err) {
@@ -97,16 +98,16 @@ class AppCrudController {
                 res.status(500).send(new AppError(500, null, err));
             }
         });
-    };
+    }
 
-    put(req, res, next) {
+    put(req, res) {
         const data = Object.assign({}, req.body) || {};
 
         //Caso possua o cabeçalho de autenticação adiciona a informação do usuário que está criando o resgitro.
-        if(!!req.headers.authorization){
+        if(req.headers.authorization){
             try {
                 let obj = authService.DecodeToken(req.headers.authorization);
-                if(!!obj.id){
+                if(obj.id){
                     data.updatedBy = obj.id;
                 }
             }catch(err) {

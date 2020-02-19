@@ -8,7 +8,11 @@
 * Messages module for message strings centralization
 * Configuration to running in **production** using [PM2](https://pm2.keymetrics.io/).
 * Authentication support using JWT.
-* Base controller with CRUD operations to extends resource controller.
+* Base controller with CRUD operations for extension having the following features:  
+    - Query filter using query params
+    - Pagination support
+    - Soft delete
+    - Validation support
 * Database integration and Object Modeling Tool using [mongoose](https://mongoosejs.com/).
 * CORS enabled.
 * Request validation using [express-validator](https://express-validator.github.io/docs/) 
