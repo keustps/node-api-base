@@ -2,7 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../../src/server');
 
-// Configure chai
 chai.use(chaiHttp);
 chai.should();
 
@@ -16,6 +15,7 @@ describe('Testing Authentication...', () =>{
             .send({ username: 'username', password: 'password' })
             .end( (err, res) =>{
                 res.should.have.status(401);
+                res.should.be.json;
                 done();
             });
         });
@@ -27,6 +27,9 @@ describe('Testing Authentication...', () =>{
             .send({ username: 'alice', password: 'alice' })
             .end( (err, res) =>{
                 res.should.have.status(201);
+                res.should.be.json;
+                res.body.should.have.property('token');
+                res.body.token.should.be.a('string').that.is.not.empty;
                 done();
             });
         });
