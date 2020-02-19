@@ -9,6 +9,7 @@ const config = {
         secret: process.env.SECRET,
     },
     server: {
+        host: 'localhost',
         port: process.env.PORT
     },
     database: {
