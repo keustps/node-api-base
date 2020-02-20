@@ -29,6 +29,8 @@ const crudErros = {
     WHEN_READ : (entity) =>{ return `Error when reading ${entity}`;},
     WHEN_UPDATE : (entity) =>{ return `Error when updating ${entity}`;},
     WHEN_DELETE : (entity) =>{ return `Error when deleting ${entity}`;},
+    ID_NOT_FOUND : (entity, id) =>{ return `No ${entity} found with id ${id}`;},
+    NOT_FOUND : (entity) =>{ return `No ${entity} found`;}
 };
 
 module.exports = {

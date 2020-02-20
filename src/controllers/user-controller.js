@@ -2,8 +2,8 @@
 
 const User = require('../models/user-model');
 const AppCrudController = require('./app-crud-controller');
-
-const controller = new AppCrudController(User, 'user');
+const userRepository = require('../repositories/user-repository');
+const controller = new AppCrudController(User, 'user', userRepository);
 
 module.exports = {
     list: controller.list.bind(controller),

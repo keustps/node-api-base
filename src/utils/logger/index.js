@@ -21,11 +21,14 @@ if (config.env == 'test') {
         ]
     });
 }else if (config.env == 'local' || config.env == 'development') {
+    logger = console;
+    /*
     logger = new winston.createLogger({
         transports : [
             new winston.transports.Console({ timestamp: true })
         ]
     });
+    */
 } else {
     const papertrailTransport = new winston.transports.Papertrail({
         host: config.logger.host,
