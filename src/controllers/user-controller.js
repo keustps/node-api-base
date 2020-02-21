@@ -1,6 +1,5 @@
 'use strict';
 
-const User = require('../models/user-model');
 const AppCrudController = require('./app-crud-controller');
 const userRepository = require('../repositories/user-repository');
 

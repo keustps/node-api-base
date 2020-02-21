@@ -3,6 +3,7 @@ const authService = require('../services/auth-service');
 const systemMessage = require('../utils/messages');
 const logger = require('../utils/logger');
 const userRepository = require('../repositories/user-repository');
+const AppError = require('../utils/error');
 
 const authenticate = async (req, res) => {
 
@@ -36,7 +37,7 @@ const authenticate = async (req, res) => {
             }catch(error) {
                 logger.error('Error when compare password (bcrypt)', error);
                 return res.status(401).send({ message: systemMessage.AuthErrors.WRONG_USER_OR_PASS });
-            };
+            }
 
         }
 

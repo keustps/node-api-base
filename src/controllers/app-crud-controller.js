@@ -20,16 +20,11 @@ class AppCrudController {
             //Supporting filter query
             if (req.query.filter) {
                 filters = JSON.parse(req.query.filter);
-            } else if (req.query && req.query.active) {
+            }else if (req.query && req.query.active) {
                 //If there is a query param "?active=true", search only the active ones
+                //If there is a query param "?active=false", search only the inactive ones
                 filters = {
-                    active: req.query.active,
-                    deletedAt: {$exists: false}
-                };
-            }else {
-                //Search only the active ones by default
-                filters = {
-                    deletedAt: {$exists: false}
+                    deletedAt: { $exists :  req.query.active == 'false' }
                 };
             }
 

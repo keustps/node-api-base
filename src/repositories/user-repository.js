@@ -1,5 +1,7 @@
 const AppBaseRepository = require('./app-base-repository');
 const UserModel = require('../models/user-model');
+const AppError = require('../utils/error');
+const systemMessages = require('../utils/messages');
 
 class UserRepository extends AppBaseRepository {
     constructor() {
