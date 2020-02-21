@@ -46,12 +46,25 @@ class AppBaseRepository {
             throw new AppError(500, systemMessages.CrudErrors.WHEN_READ(this.entityName), err);
         }
     }
-    async update(){}
 
-    async removeById(id){
-        //Not a physical delete, but a soft delete
+    //Update a document by id in a collection
+    async updateById(id, data){
         try {
-            return await this.model.findByIdAndUpdate({ _id: id }, { deletedAt: new Date() }, { new: true});
+            return await this.model.findByIdAndUpdate(id, data, { new: true});
+        }catch(err) {
+            throw new AppError(500, systemMessages.CrudErrors.WHEN_DELETE(this.entityName), err);
+        }
+    }
+
+    //This method supports both physical and soft deletion
+    async removeById(id, softDelete = true){
+        try {
+            //If is a soft delete
+            if(softDelete) {
+                return await this.model.findByIdAndUpdate(id, { deletedAt: new Date() }, { new: true});
+            }
+            return await this.model.findByIdAndDelete(id);
+
         }catch(err) {
             throw new AppError(500, systemMessages.CrudErrors.WHEN_DELETE(this.entityName), err);
         }

@@ -3,8 +3,8 @@
 const User = require('../models/user-model');
 const AppCrudController = require('./app-crud-controller');
 const userRepository = require('../repositories/user-repository');
-const controller = new AppCrudController(User, 'user', userRepository);
 
+const controller = new AppCrudController(userRepository);
 module.exports = {
     list: controller.list.bind(controller),
     get: controller.get.bind(controller),

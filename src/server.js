@@ -22,6 +22,7 @@ const api = express();
 const BASE_PATH = '/api';
 //Importing routes file
 const routes = require('./routes');
+const db = require('./utils/db');
 
 //Accepting CORS
 api.use(cors());
@@ -50,16 +51,21 @@ api.use((err, req, res, next) => {
 //Setting the application routes
 api.use(BASE_PATH, routes);
 
-api.listen(config.server.port, err => {
+api.listen(config.server.port, async (err) => {
     if (err) {
         logger.error(err);
         process.exit(1);
     }
     //Connecting to database
-    require('./utils/db');
-    logger.info(
-        `API is now running on port ${config.server.port} in ${config.env} mode`
-    );
+    try {
+        await db.Run();
+        logger.info(`API is now running on port ${config.server.port} in ${config.env} mode`);
+    }catch(err) {
+        logger.error('Erro on database connect. Exiting application.');
+        logger.error(err);
+        process.exit(1);
+    }
+
 });
 
 module.exports = api;

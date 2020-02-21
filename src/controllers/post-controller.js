@@ -1,13 +1,12 @@
 'use strict';
 
 const logger = require('../utils/logger');
-const Post = require('../models/post-model');
 const AppCrudController = require('./app-crud-controller');
 const systemMessages = require('../utils/messages');
 
 class PostController extends AppCrudController {
-    constructor(model, entityName){
-        super(model, entityName);
+    constructor(repository){
+        super(repository);
     }
 
     //Overriding post method
@@ -27,7 +26,7 @@ class PostController extends AppCrudController {
     }
 }
 
-const controller = new PostController(Post, 'post');
+const controller = new PostController();
 module.exports = {
     get: controller.get.bind(controller),
     post: controller.post.bind(controller),

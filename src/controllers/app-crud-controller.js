@@ -8,9 +8,7 @@ const systemMessages = require('../utils/messages');
 
 class AppCrudController {
 
-    constructor(model, entityName, repository) {
-        this.model = model;
-        this.entityName = entityName;
+    constructor(repository) {
         this.repository = repository;
     }
 
@@ -35,7 +33,7 @@ class AppCrudController {
                 };
             }
 
-            let data = await this.repository.getAll(filters, req.query.skip, req.query.limit);
+            const data = await this.repository.getAll(filters, req.query.skip, req.query.limit);
             if(!data) {
                 return res.status(404).send(new AppError(404, systemMessages.CrudErrors.NOT_FOUND(this.entityName)));
             }
@@ -52,8 +50,8 @@ class AppCrudController {
     async delete(req, res) {
 
         try {
-            let id = req.params.id;
-            let data = await this.repository.removeById(id);
+            const id = req.params.id;
+            const data = await this.repository.removeById(id);
             if(!data) {
                 return res.status(404).send(new AppError(404, systemMessages.CrudErrors.ID_NOT_FOUND(this.entityName, id)));
             }
@@ -70,8 +68,8 @@ class AppCrudController {
 
     async get(req, res) {
         try {
-            let id = req.params.id;
-            let data = await this.repository.getById(id);
+            const id = req.params.id;
+            const data = await this.repository.getById(id);
             if(!data) {
                 return res.status(404).send(new AppError(404, systemMessages.CrudErrors.ID_NOT_FOUND(this.entityName, id)));
             }
@@ -85,64 +83,59 @@ class AppCrudController {
         }
     }
 
-    post(req, res) {
-        const data = Object.assign({}, req.body) || {};
-        //Get the logged user information to inject updatedBy information
-        if(req.headers.authorization){
-            try {
-                let obj = authService.DecodeToken(req.headers.authorization);
-                if(obj.id){
-                    data.updatedBy = obj.id;
+    async post(req, res) {
+        try {
+            const data = Object.assign({}, req.body) || {};
+            //Get the logged user information to inject updatedBy information
+            if(req.headers.authorization){
+                try {
+                    const obj = authService.DecodeToken(req.headers.authorization);
+                    if(obj.id){
+                        data.updatedBy = obj.id;
+                    }
+                }catch(err) {
+                    //Invalid token
+                    return res.status(401).send(new AppError(401, systemMessages.HttpErrors[401], err));
                 }
-            }catch(err) {
-                //Invalid token
-                return res.status(401).send(new AppError(401, systemMessages.HttpErrors[401], err));
             }
-        }
 
-        this.model.create(data)
-        .then(data => {
-            res.json(data);
-        })
-        .catch(err => {
-            if (err.name == 'ValidationError') {
-                res.status(422).send(new AppError(422, systemMessages.CrudErrors.WHEN_CREATE(this.entityName), err));
-            } else {
-                logger.error(err);
-                res.status(500).send(new AppError(500, null, err));
+            const newUser = await this.repository.add(data);
+            return res.status(200).send(newUser);
+        }catch(err) {
+            logger.error(err);
+            if(err instanceof AppError){
+                return res.status(err.code).send(err);
             }
-        });
+            return res.status(500).send(new AppError(500, err));
+        }
     }
 
-    put(req, res) {
-        const data = Object.assign({}, req.body) || {};
-
-        //Caso possua o cabeçalho de autenticação adiciona a informação do usuário que está criando o resgitro.
-        if(req.headers.authorization){
-            try {
-                let obj = authService.DecodeToken(req.headers.authorization);
-                if(obj.id){
-                    data.updatedBy = obj.id;
+    async put(req, res) {
+        try {
+            const id = req.params.id;
+            const data = Object.assign({}, req.body) || {};
+            //Get the logged user information to inject updatedBy information
+            if(req.headers.authorization){
+                try {
+                    const obj = authService.DecodeToken(req.headers.authorization);
+                    if(obj.id){
+                        data.updatedBy = obj.id;
+                    }
+                }catch(err) {
+                    //Invalid token
+                    return res.status(401).send(new AppError(401, systemMessages.HttpErrors[401], err));
                 }
-            }catch(err) {
-                //Invalid token
-                return res.status(401).send(new AppError(401, systemMessages.HttpErrors[401], err));
             }
-        }
 
-        this.model.findByIdAndUpdate({ _id: req.params.id }, data, { new: true})
-        .exec()
-        .then((data) => {
-            res.status(200).send(data);
-        })
-        .catch(err => {
-            if (err.name == 'ValidationError') {
-                res.status(422).send(new AppError(422, systemMessages.CrudErrors.WHEN_UPDATE(this.entityName), err));
-            } else {
-                logger.error(err);
-                res.status(500).send(new AppError(500, null, err));
+            const newUser = await this.repository.updateById(id, data);
+            return res.status(200).send(newUser);
+        }catch(err) {
+            logger.error(err);
+            if(err instanceof AppError){
+                return res.status(err.code).send(err);
             }
-        });
+            return res.status(500).send(new AppError(500, err));
+        }
     }
 }
 

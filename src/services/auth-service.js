@@ -16,7 +16,7 @@ const decodeToken = (token) => {
     return data;
 };
 
-const authorize = function (req, res, next) {
+const authorize = (req, res, next) => {
     var token = req.body.token || req.query.token || req.headers.authorization;
 
     if (!token) {
@@ -24,7 +24,7 @@ const authorize = function (req, res, next) {
             message: systemMessages.HttpErrors[401]
         });
     } else {
-        jwt.verify(token, config.jwt.secret, function (error) {
+        jwt.verify(token, config.jwt.secret, (error) => {
             if (error) {
                 res.status(401).json({
                     message: systemMessages.AuthErrors.INVALID_TOKEN
@@ -36,7 +36,7 @@ const authorize = function (req, res, next) {
     }
 };
 
-const isAdmin = function (req, res, next) {
+const isAdmin = (req, res, next) => {
     var token = req.body.token || req.query.token || req.headers.authorization;
 
     if (!token) {
@@ -44,7 +44,7 @@ const isAdmin = function (req, res, next) {
             message: systemMessages.HttpErrors[401]
         });
     } else {
-        jwt.verify(token, config.jwt.secret, function (error, decoded) {
+        jwt.verify(token, config.jwt.secret, (error, decoded) => {
             if (error) {
                 res.status(401).json({
                     message: systemMessages.AuthErrors.INVALID_TOKEN
