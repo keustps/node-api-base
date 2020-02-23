@@ -43,7 +43,7 @@ class AppBaseRepository {
         try {
             return await this.model.create(data);
         }catch(err) {
-            throw new AppError(500, systemMessages.CrudErrors.WHEN_READ(this.entityName), err);
+            throw new AppError(500, systemMessages.CrudErrors.WHEN_CREATE(this.entityName), err);
         }
     }
 
@@ -52,7 +52,7 @@ class AppBaseRepository {
         try {
             return await this.model.findByIdAndUpdate(id, data, { new: true});
         }catch(err) {
-            throw new AppError(500, systemMessages.CrudErrors.WHEN_DELETE(this.entityName), err);
+            throw new AppError(500, systemMessages.CrudErrors.WHEN_UPDATE(this.entityName), err);
         }
     }
 
