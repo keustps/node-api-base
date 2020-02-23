@@ -37,8 +37,6 @@ class PostController extends AppCrudController {
         //Trying to get logged user information
         try {
             let user = authService.DecodeToken(req.headers.authorization);
-            console.log('user', user);
-            console.log('postToUpdate', postToUpdate);
             //Only admins can edit post from another user
             if(postToUpdate.author != user.id) {
                 return res.status(401).send(new AppError(401, systemMessages.AuthErrors.ONLY_ADMIN_CAN_EDIT_POST));

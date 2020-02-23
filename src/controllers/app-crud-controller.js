@@ -81,7 +81,6 @@ class AppCrudController {
     async post(req, res) {
         try {
             const data = Object.assign({}, req.body) || {};
-            console.log('data to create', data);
             //Get the logged user information to inject updatedBy information
             if(req.headers.authorization){
                 try {
