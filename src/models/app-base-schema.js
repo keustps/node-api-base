@@ -15,6 +15,10 @@ const appBaseSchema = function AppBaseSchema() {
         updatedBy:  {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
+        },
+        createdBy:  {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         }
     });
 

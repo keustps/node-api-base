@@ -12,7 +12,8 @@ const routerErrors = {
 const authErrors = {
     INVALID_TOKEN : 'Invalid Token',
     ONLY_ADMIN : 'This functionality is restricted to administrators',
-    WRONG_USER_OR_PASS : 'Invalid user or password'
+    WRONG_USER_OR_PASS : 'Invalid user or password',
+    ONLY_ADMIN_CAN_EDIT_POST : 'Only admin can edit another user post'
 };
 
 const requestValidationErrors = {

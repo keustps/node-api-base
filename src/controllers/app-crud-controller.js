@@ -81,12 +81,13 @@ class AppCrudController {
     async post(req, res) {
         try {
             const data = Object.assign({}, req.body) || {};
+            console.log('data to create', data);
             //Get the logged user information to inject updatedBy information
             if(req.headers.authorization){
                 try {
                     const obj = authService.DecodeToken(req.headers.authorization);
                     if(obj.id){
-                        data.updatedBy = obj.id;
+                        data.createdBy = obj.id;
                     }
                 }catch(err) {
                     //Invalid token
