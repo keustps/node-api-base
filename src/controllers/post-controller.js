@@ -1,8 +1,10 @@
 'use strict';
 
-const logger = require('../utils/logger');
+const AppError = require('../utils/error');
 const AppCrudController = require('./app-crud-controller');
 const systemMessages = require('../utils/messages');
+const authService = require('../services/auth-service');
+const postRepository = require('../repositories/post-repository');
 
 class PostController extends AppCrudController {
     constructor(repository){
@@ -26,7 +28,7 @@ class PostController extends AppCrudController {
     }
 }
 
-const controller = new PostController();
+const controller = new PostController(postRepository);
 module.exports = {
     get: controller.get.bind(controller),
     post: controller.post.bind(controller),
