@@ -47,7 +47,7 @@ The test cases examples can be found on test folder. There is an unit test for a
 
 ## Support for PM2
 This project comes with a basic PM2 configuration file called `process.json`, for **PM2** use you could run the following command:
-```
+```batchfile
 pm2 start process.json
 ```
 
