@@ -6,7 +6,7 @@ const config = {
         MAXIMO_MINS_ATIVO: 40
     },
     jwt: {
-        secret: process.env.SECRET,
+        secret: process.env.JWT_SECRET,
     },
     server: {
         host: 'localhost',
