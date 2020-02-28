@@ -10,6 +10,7 @@ class AppCrudController {
 
     constructor(repository) {
         this.repository = repository;
+        this.entityName = this.repository.entityName
     }
 
     async list(req, res) {
