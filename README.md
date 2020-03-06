@@ -52,4 +52,5 @@ pm2 start process.json
 ```
 
 ## Author
-Keust Pablo Silvano <keustps@pbh.gov.br> - ramal `78536`
+Keust Pablo Silvano ( [e-mail](keustps@gmail.com), [LinkedIn](https://www.linkedin.com/in/keust-silvano), [Medium](https://medium.com/@keustps) )
+
